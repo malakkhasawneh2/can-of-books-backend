@@ -35,7 +35,7 @@ async function main() {
 
   BookModel = mongoose.model('Book', bookSchema);
   //call one time then commit it to drevent rebited
-    // seedData();
+    seedData();
 }
 
 async function seedData() {
