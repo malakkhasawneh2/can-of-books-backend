@@ -77,6 +77,7 @@ server.get('/', homeHandler);
 server.get('/getBooks', getBooksHandler);
 server.post('/addBook', addBookHandler);
 server.delete('/deleteBook/:id', deleteBookHandler);
+server.put('/updateBook/:id',updateBookHandler);
 
 //Functions Handlers
 function homeHandler(req, res) {
@@ -138,6 +139,28 @@ function deleteBookHandler(req, res) {
 
 
 }
+
+
+
+function updateBookHandler(req,res){
+  const id=req.params.id;
+  const {title,description,email,status}= req.body;
+  BookModel.findByIdAndUpdate(id,{title,description,status},(err,result)=>{
+    BookModel.find({ownerEmail:email},(err,result)=>{
+      if(err)
+      {
+        console.log(err);
+      }
+      else{
+        console.log(result);
+        res.send(result)
+      }
+    })
+  })
+
+}
+
+
 
 
 
